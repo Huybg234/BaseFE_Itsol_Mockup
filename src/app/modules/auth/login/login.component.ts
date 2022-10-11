@@ -1,28 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '../../@core/services/auth.service';
-import { TokenService } from '../../@core/services/token.service';
-import {UserService} from "../../@core/services/user.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {User} from "../../../@core/models/user";
+import {AuthService} from "../../../@core/services/auth.service";
+import {TokenService} from "../../../@core/services/token.service";
+import {Router} from "@angular/router";
+import {UserService} from "../../../@core/services/user.service";
 
 @Component({
-  selector: 'ngx-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss'],
+  selector: 'ngx-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class AuthComponent implements OnInit {
+export class LoginComponent implements OnInit {
 
   formLogin: FormGroup;
   isSubmitted = false;
   roles: string[] = [];
   isLoggedIn = false;
 
+
   constructor(private fb: FormBuilder,
-    private authService: AuthService,
-    private tokenService: TokenService,
-    private router: Router,
-    private userService: UserService,
-  ) { }
+              private authService: AuthService,
+              private tokenService: TokenService,
+              private router: Router,
+              private  userService: UserService,
+  ) {
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -30,7 +33,6 @@ export class AuthComponent implements OnInit {
       this.isLoggedIn = true;
       // this.roles = this.tokenService.getUser().roles;
     }
-
   }
 
   initForm() {
@@ -40,7 +42,6 @@ export class AuthComponent implements OnInit {
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/member-ordering
   get f() {
     return this.formLogin.controls;
   }
@@ -60,6 +61,7 @@ export class AuthComponent implements OnInit {
       );
     }
   }
+
   forgotPassword() {
     this.router.navigate(['/auth/forgot-password']).then(r => console.log(r));
   }

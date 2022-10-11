@@ -20,6 +20,7 @@ export const routes: Routes = [
   { path: '**',
     redirectTo: 'home',
   },
+
 ];
 
 const config: ExtraOptions = {
