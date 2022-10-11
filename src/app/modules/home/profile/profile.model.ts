@@ -1,4 +1,6 @@
 export interface User {
+    id?:number;
+    name?:string;
     fullName?:string;
     email?:string;
     userName?:string;
@@ -7,4 +9,8 @@ export interface User {
     avatarName?:string;
     gender?:string;
     birthDay?:string;
+    cccd?:string|number;
+    position?:string;
+    password?:string;
+
 }

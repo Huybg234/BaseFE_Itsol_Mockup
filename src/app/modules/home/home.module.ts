@@ -8,6 +8,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { SharedModule } from 'primeng/api';
 import { PrimengModule } from '../../shared/primeng.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import {PasswordComponent} from "./password/password.component";
+import {StaffListComponent} from "./staff/staff-list/staff-list.component";
+import {StaffComponent} from "./staff/staff.component";
 
 const routes: Routes = [{
   path: '',
@@ -21,6 +24,14 @@ const routes: Routes = [{
       path: 'profile',
       component: ProfileComponent,
     },
+    {
+      path: 'password',
+      component: PasswordComponent,
+    },
+    {
+      path: 'staff',
+      component: StaffComponent,
+    },
 
   ],
 }];
@@ -29,6 +40,9 @@ const routes: Routes = [{
   declarations: [
     HomeComponent,
     ProfileComponent,
+    PasswordComponent,
+    StaffListComponent,
+    StaffComponent
   ],
   imports: [
     CommonModule,

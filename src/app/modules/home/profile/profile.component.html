@@ -1,24 +1,66 @@
 <h1>Thông tin cá nhân</h1>
 <p-card>
-    <form [formGroup]="formProfile">
-        <div class="row">
-            <img src="assets/images/alan.png" alt="Avatar"
-                style="width:200px; border-radius: 50%;  margin: 0 auto; margin-bottom: 20px;">
-        </div>
+  <div class="row">
+    <div class="col-md-7">
+      <img *ngIf="user"  [src]="urlAvatar + avatarName" alt="Avatar"
+           style="width:200px;height:200px; border-radius: 50%;float:right;   margin-bottom: 20px;">
+    </div>
+
+    <!--          <div class="col-md-5">-->
+    <!--            <button class="btn btn-primary"-->
+    <!--            style="margin-top: 20%;"-->
+    <!--            >Change Avatar</button>-->
+    <!--          </div>-->
+    <div class="text-center">
+      <input class="form-control" style="margin-top: 20%" type="file"
+             (change)="onChange($event)">
+      <button style="margin-top: 4%" (click)="onUpload()"
+              class="btn btn-success">
+        Change IMG
+      </button>
+    </div>
+
+  </div>
+    <form [formGroup]="formProfile" (submit)="submit()" >
+
         <div class="form-row">
             <div class="form-group col-md-6">
                 <div class="row">
                     <label class="label col-3 col-form-label ">Họ và Tên</label>
                     <div class="col-9">
-                        <input type="text" pInputText class="form-control" formControlName="fullName">
+                        <input type="text" pInputText class="form-control" formControlName="name">
+
+                      <div *ngIf="this.formProfile.controls.name.invalid && (this.formProfile.controls.name.dirty||this.formProfile.controls.name.touched) ">
+                        <div *ngIf="this.formProfile.controls.name.errors">
+                          <div *ngIf="this.formProfile.controls.name.errors.required" >
+                            <small id="fullName" class="form-text text-muted" style="color: red !important;">Không được để trống</small>
+                          </div>
+                          <div *ngIf="this.formProfile.controls.name.errors.minlength||this.formProfile.controls.name.errors.maxlength" >
+                            <small  class="form-text text-muted" style="color: red !important;">Tên phải từ 5-50 ký tự</small>
+                          </div>
+
+                        </div>
+                      </div>
                     </div>
                 </div>
             </div>
+
             <div class="form-group col-md-6">
                 <div class="row">
                     <label class="label col-3 col-form-label">Email</label>
                     <div class="col-9">
-                        <input type="text" pInputText class="form-control" formControlName="email">
+                        <input type="text" pInputText class="form-control" disabled  formControlName="email">
+                      <div *ngIf="this.formProfile.controls.email.invalid && (this.formProfile.controls.email.dirty||this.formProfile.controls.email.touched) ">
+                        <div *ngIf="this.formProfile.controls.email.errors">
+                          <div *ngIf="this.formProfile.controls.email.errors.required" >
+                            <small class="form-text text-muted" style="color: red !important;">Không được để trống</small>
+                          </div>
+                          <div *ngIf="this.formProfile.controls.email.errors.email" >
+                            <small class="form-text text-muted" style="color: red !important;">Không đúng định dạng email</small>
+                          </div>
+
+                        </div>
+                      </div>
                     </div>
                 </div>
 
@@ -30,6 +72,17 @@
                     <label class="label col-3 col-form-label">Số điện thoại</label>
                     <div class="col-9">
                         <input type="text" pInputText class="form-control" formControlName="phoneNumber">
+                      <div *ngIf="this.formProfile.controls.phoneNumber.invalid && (this.formProfile.controls.phoneNumber.dirty||this.formProfile.controls.phoneNumber.touched) ">
+                        <div *ngIf="this.formProfile.controls.phoneNumber.errors">
+                          <div *ngIf="this.formProfile.controls.phoneNumber.errors.required" >
+                            <small class="form-text text-muted" style="color: red !important;">Không được để trống</small>
+                          </div>
+                          <div *ngIf="this.formProfile.controls.phoneNumber.errors.pattern" >
+                            <small class="form-text text-muted" style="color: red !important;">Không đúng định dạng SĐT(10 chữ số...)</small>
+                          </div>
+
+                        </div>
+                      </div>
                     </div>
                 </div>
 
@@ -44,12 +97,20 @@
 
             </div>
         </div>
-        <div class="form-row">
+        <div class="form-row" style="margin-bottom: 20px;">
             <div class="col-md-6">
                 <div class="row">
                     <label class="label col-3 col-form-label">Quê quán</label>
                     <div class="col-9">
                         <input type="text" pInputText class="form-control" formControlName="homeTown">
+                      <div *ngIf="this.formProfile.controls.homeTown.invalid && (this.formProfile.controls.homeTown.dirty||this.formProfile.controls.homeTown.touched) ">
+                        <div *ngIf="this.formProfile.controls.homeTown.errors">
+                          <div *ngIf="this.formProfile.controls.homeTown.errors.required" >
+                            <small  class="form-text text-muted" style="color: red !important;">Không được để trống</small>
+                          </div>
+
+                        </div>
+                      </div>
                     </div>
                 </div>
 
@@ -58,14 +119,66 @@
                 <div class="row">
                     <label class="label col-sm-3 col-form-label">Giới tính</label>
                     <div class="col-sm-9">
-                        <input type="text" pInputText class="form-control" formControlName="gender">
+<!--                        <input type="text" pInputText class="form-control" formControlName="gender">-->
+                      <select id="gender"  class="form-control" formControlName="gender">
+
+                        <option [selected]="gender === value" value="Nam" >Nam</option>
+                        <option [selected]="gender === value" value="Nữ">Nữ</option>
+                        <option [selected]="gender === value"  value="Khác">Khác</option>
+                      </select>
                     </div>
                 </div>
 
             </div>
         </div>
+
+      <div class="form-row" style="margin-bottom: 20px;">
+        <div class="col-md-6">
+          <div class="row">
+            <label class="label col-3 col-form-label">CCCD</label>
+            <div class="col-9">
+              <input type="text" pInputText class="form-control" formControlName="cccd">
+              <div *ngIf="this.formProfile.controls.cccd.invalid && (this.formProfile.controls.cccd.dirty||this.formProfile.controls.cccd.touched) ">
+                <div *ngIf="this.formProfile.controls.cccd.errors">
+                  <div *ngIf="this.formProfile.controls.cccd.errors.required" >
+                    <small class="form-text text-muted" style="color: red !important;">Không được để trống</small>
+                  </div>
+                  <div *ngIf="this.formProfile.controls.cccd.errors.pattern" >
+                    <small class="form-text text-muted" style="color: red !important;">CCCD có 13 chữ số</small>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <label class="label col-sm-3 col-form-label">Chức vụ</label>
+            <div class="col-sm-9">
+              <input type="text" pInputText class="form-control" disabled formControlName="position">
+              <div *ngIf="this.formProfile.controls.position.invalid && (this.formProfile.controls.position.dirty||this.formProfile.controls.position.touched) ">
+                <div *ngIf="this.formProfile.controls.position.errors">
+                  <div *ngIf="this.formProfile.controls.position.errors.required" >
+                    <small id="email" class="form-text text-muted" style="color: red !important;">Không được để trống</small>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="col-md-12">
+        <button  class="btn btn-primary" style="float: right;">Save</button>
+      </div>
+
     </form>
     <ng-template pTemplate="footer">
-        Chân trang trình bày tại đây !
+<!--        Chân trang trình bày tại đây !-->
     </ng-template>
 </p-card>

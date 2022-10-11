@@ -21,4 +21,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'globe-2-outline',
     link: '/home/product',
   },
+  {
+    title: 'Quản lý nhân viên',
+    icon: 'globe-2-outline',
+    link: '/home/staff',
+  },
 ];
