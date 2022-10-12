@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   'vxymu3Q3flbieqI1HvuAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAQUlEQVQ4jWNgGAWjgP6ASdncAEaiAhaGiACmFhCJLsMaIiDAEQEi0WXYEiMC' +
   'OCJAJIY9KuYGTC0gknpuHwXDGwAA5fsIZw0iYWYAAAAASUVORK5CYII=';
 
-  name=this.sessionService.getItem('auth-user')
+  name=localStorage.getItem('auth-user')
 
   themes = [
     {

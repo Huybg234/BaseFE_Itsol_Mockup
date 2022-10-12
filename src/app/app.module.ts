@@ -21,7 +21,7 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
-
+import { Interceptor } from './@core/interceptor/auth.interceptor';
 const configToast: any = {
   timeOut: 3000,
   positionClass: 'toast-top-right',
@@ -51,6 +51,13 @@ const configToast: any = {
     ThemeModule.forRoot(),
     ToastrModule.forRoot(configToast),
   ],
+  // providers: [
+  //   {
+  //     provide: HTTP_INTERCEPTORS,
+  //     useClass: Interceptor,
+  //     multi: true
+  //   }
+  // ],
   bootstrap: [AppComponent],
 })
 export class AppModule {
